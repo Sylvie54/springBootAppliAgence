@@ -12,7 +12,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -23,7 +28,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 //@ResponseBody  //  pour répondre sans passer par une vue
 public class AffichController 
 {
-    @GetMapping("/circuits/{id}") 								
+    @RequestMapping(value = "/circuits/{id}", method = RequestMethod.GET)
+  //  @GetMapping("/circuits/{id}") 								
     //appel API recherche circuit id
     public String findById(@PathVariable int id, ModelMap params)
     {
@@ -32,6 +38,13 @@ public class AffichController
        // on appelle le template detailCircuit.html, en lui passant en paramètre 
        // le circuit demandé
        return "detailCircuit";
+    }
+    
+    @RequestMapping(value = "/circuits/{id}", method = RequestMethod.POST)
+    public String retourFormulaire(ModelMap params,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
+        System.out.println("le nom : " + nom + " le pays : " + pays);
+        this.findAll(params);
+        return "listeCircuits";	
     }
 
     @GetMapping("/circuits") 									
@@ -61,11 +74,7 @@ public class AffichController
        return findAll (params) ; 						
     // réaffichage de tous les circuits après la suppression   
     }
-    @GetMapping("/saisieCircuit")
-    public String saisie(ModelMap params) 
-    {
-        return "saisieCircuit";
-    }        
+            
     
     	
 }

@@ -14,20 +14,24 @@ and open the template in the editor.
     </head>
     <body>
        <h1>Détail d'un circuit</h1>
+        <form name="SaisieCircuit" method="post">
 	<table class="table">
 	<tr>
 		<td>Id :</td>
-		<td><h3 th:text="${circuit.id}"></h3></td>
+                <td><h3 th:text="${circuit.id}"></h3></td>
 	</tr> 
 	<tr>
 		<td>Nom :</td>
-		<td><h3 th:text="${circuit.nom}"></h3></td>
+		<td><h3 > <input type="text" name="Nom" id="Nom"  size="50" th:value="${circuit.nom}"></h3></td>
 	</tr>
 	<tr>
 		<td>Pays :</td>
-		<td><h3 th:text="${circuit.pays}"></h3></td>
+                <td><h3><input type="text" name="pays" id="pays"  size="50" th:value="${circuit.pays}"></h3></td>
 	</tr>
 
 	</table>
+      
+        <input type="submit" value="Valider" name="BtnSubmit" /> </p>
+     </form>
     </body>
 </html>

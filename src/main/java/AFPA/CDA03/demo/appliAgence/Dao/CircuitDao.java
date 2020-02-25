@@ -24,7 +24,7 @@ public class CircuitDao {
         String URL = "http://localhost:8080/circuits/" + id;
         RestTemplate restTemplate = new RestTemplate();
         Circuit c = restTemplate.getForObject (URL, Circuit.class);
-        System.out.println("API succeded " + c);
+        System.out.println("API succeded findById " + c);
         return c;
         }
         catch(Exception e)
@@ -42,7 +42,7 @@ public class CircuitDao {
                 Circuit[] tab = restTemplate.getForObject(URL, Circuit[].class);
                 List<Circuit> ls = new ArrayList<Circuit>(Arrays.asList(tab));  // conversion du tableau en liste
 
-                System.out.println("API succeded " + ls);
+                System.out.println("API succeded findAll " + ls);
                 return ls;
             } catch (Exception e) {
                 System.out.println("ERREUR : Service non lancé !!  " + e.toString());
@@ -60,7 +60,7 @@ public class CircuitDao {
               String URL = "http://localhost:8080/circuits/" + id;
               RestTemplate restTemplate = new RestTemplate();
               Circuit c = restTemplate.getForObject (URL, Circuit.class);
-              System.out.println("API succeded " + c);
+              System.out.println("API succeded  editById" + c);
             return c;
         }
             catch(Exception e)
