@@ -5,10 +5,11 @@
  */
 package AFPA.CDA03.demo.appliAgence.Dao;
 
-import AFPA.CDA03.demo.appliAgence.models.Circuit;
+import AFPA.CDA03.demo.appliAgence.models.Circuits;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -16,14 +17,14 @@ import org.springframework.web.client.RestTemplate;
  * @author Acer
  */
 public class CircuitDao {
-    public static Circuit findById(int id)
+    public static Circuits findById(int id)
     {
     try
     {
         // Appel API
         String URL = "http://localhost:8080/circuits/" + id;
         RestTemplate restTemplate = new RestTemplate();
-        Circuit c = restTemplate.getForObject (URL, Circuit.class);
+        Circuits c = restTemplate.getForObject (URL, Circuits.class);
         System.out.println("API succeded findById " + c);
         return c;
         }
@@ -33,14 +34,14 @@ public class CircuitDao {
         return null;
         }
     }
-    public static List<Circuit> findAll()
+    public static List<Circuits> findAll()
     {
             try {
                 // Appel API
                 String URL = "http://localhost:8080/circuits";
                 RestTemplate restTemplate = new RestTemplate();
-                Circuit[] tab = restTemplate.getForObject(URL, Circuit[].class);
-                List<Circuit> ls = new ArrayList<Circuit>(Arrays.asList(tab));  // conversion du tableau en liste
+                Circuits[] tab = restTemplate.getForObject(URL, Circuits[].class);
+                List<Circuits> ls = new ArrayList<Circuits>(Arrays.asList(tab));  // conversion du tableau en liste
 
                 System.out.println("API succeded findAll " + ls);
                 return ls;
@@ -51,7 +52,7 @@ public class CircuitDao {
 
     }
     
-    public static Circuit editById(int id)
+    public static Circuits editById(int id)
     {
         try
 
@@ -59,7 +60,7 @@ public class CircuitDao {
             // Appel API
               String URL = "http://localhost:8080/circuits/" + id;
               RestTemplate restTemplate = new RestTemplate();
-              Circuit c = restTemplate.getForObject (URL, Circuit.class);
+              Circuits c = restTemplate.getForObject (URL, Circuits.class);
               System.out.println("API succeded  editById" + c);
             return c;
         }

@@ -5,16 +5,23 @@
  */
 package AFPA.CDA03.demo.appliAgence.models;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+
 /**
  *
  * @author Acer
  */
-public class Circuit {
+@Entity
+public class Circuits {
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @javax.persistence.Id
     private int id;
     private String nom;
     private String pays;
-    public Circuit() { }
-    public Circuit(int id, String nom, String pays) {
+    public Circuits() { }
+    public Circuits(int id, String nom, String pays) {
         this.id = id;
         this.nom = nom;
         this.pays = pays; 

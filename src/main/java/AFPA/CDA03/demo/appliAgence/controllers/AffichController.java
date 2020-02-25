@@ -6,13 +6,16 @@
 package AFPA.CDA03.demo.appliAgence.controllers;
 
 import AFPA.CDA03.demo.appliAgence.Dao.CircuitDao;
-import AFPA.CDA03.demo.appliAgence.models.Circuit;
+import AFPA.CDA03.demo.appliAgence.Dao.CircuitsRepository;
+import AFPA.CDA03.demo.appliAgence.models.Circuits;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,12 +31,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 //@ResponseBody  //  pour répondre sans passer par une vue
 public class AffichController 
 {
+    @Autowired
+    private CircuitsRepository CircuitsData;
+    
     @RequestMapping(value = "/circuits/{id}", method = RequestMethod.GET)
   //  @GetMapping("/circuits/{id}") 								
     //appel API recherche circuit id
     public String findById(@PathVariable int id, ModelMap params)
     {
-       Circuit c = CircuitDao.findById(id);
+       Circuits c = CircuitDao.findById(id);
        params.put("circuit", c );
        // on appelle le template detailCircuit.html, en lui passant en paramètre 
        // le circuit demandé
@@ -41,8 +47,10 @@ public class AffichController
     }
     
     @RequestMapping(value = "/circuits/{id}", method = RequestMethod.POST)
-    public String retourFormulaire(ModelMap params,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
-        System.out.println("le nom : " + nom + " le pays : " + pays);
+    public String retourFormulaire(ModelMap params,@RequestParam("Id") int Id,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
+        System.out.println(" id : " + Id + "le nom : " + nom + " le pays : " + pays);
+        Circuits circuit = new Circuits(Id, nom, pays);
+        CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
     }
@@ -51,7 +59,7 @@ public class AffichController
     //appel API liste de tous les circuits
     public String findAll(ModelMap params)
     {
-        List<Circuit> liste = CircuitDao.findAll();
+        List<Circuits> liste = CircuitDao.findAll();
         // on appelle le template listeCircuits.html, en lui passant en paramètre 
         // la liste de tous les circuits
         params.put("circuits", liste );
