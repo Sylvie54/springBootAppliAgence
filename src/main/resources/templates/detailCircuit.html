@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<html xmlns:th="http://www.thymeleaf.org">    
+    <head>
+        <title>detail circuit</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+    </head>
+    <body>
+       <h1>Détail d'un circuit</h1>
+	<table class="table">
+	<tr>
+		<td>Id :</td>
+		<td><h3 th:text="${circuit.id}"></h3></td>
+	</tr> 
+	<tr>
+		<td>Nom :</td>
+		<td><h3 th:text="${circuit.nom}"></h3></td>
+	</tr>
+	<tr>
+		<td>Pays :</td>
+		<td><h3 th:text="${circuit.pays}"></h3></td>
+	</tr>
+
+	</table>
+    </body>
+</html>

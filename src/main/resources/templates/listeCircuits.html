@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>liste des circuits</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+        <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
+    </head>
+    <body>
+        <div class="container">
+    <h1>Liste des circuits</h1>
+
+   
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+	        <th>Nom</th>
+	        <th>Pays</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="c:${circuits}">
+            <td>
+            <a th:href="@{'/circuits/' + ${c.id}}" class="btn btn-danger">
+                    <span th:text="${c.id}"></span>
+                </a></td>
+            <td><span th:text="${c.nom}"></span></td>
+            <td><span th:text="${c.pays}"></span></td>
+            <td>
+                <a th:href="@{'/removeCircuit/' + ${c.id}}" class="btn btn-danger">
+                    <i class="material-icons">delete</i>
+                </a>                
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
+    </body>
+</html>
