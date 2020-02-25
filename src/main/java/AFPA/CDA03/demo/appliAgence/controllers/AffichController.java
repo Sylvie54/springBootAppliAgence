@@ -61,6 +61,11 @@ public class AffichController
        return findAll (params) ; 						
     // réaffichage de tous les circuits après la suppression   
     }
+    @GetMapping("/saisieCircuit")
+    public String saisie(ModelMap params) 
+    {
+        return "saisieCircuit";
+    }        
     
     	
 }
