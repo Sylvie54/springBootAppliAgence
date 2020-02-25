@@ -83,6 +83,23 @@ public class AffichController
     // réaffichage de tous les circuits après la suppression   
     }
             
-    
+     @RequestMapping(value = "/circuits/ajout", method = RequestMethod.GET)
+  
+    public String ajout( ModelMap params)
+    {
+       Circuits c = new Circuits();
+       params.put("circuit", c );
+       // on appelle le template detailCircuit.html, en lui passant en paramètre 
+       // le circuit demandé
+       return "detailCircuit";
+    }
+    @RequestMapping(value = "/circuits/ajout", method = RequestMethod.POST)
+    public String retourAjout(ModelMap params,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
+        System.out.println("ajout le nom : " + nom + " le pays : " + pays);
+        Circuits circuit = new Circuits(0, nom, pays);
+        CircuitsData.save(circuit);
+        this.findAll(params);
+        return "listeCircuits";	
+    }
     	
 }
