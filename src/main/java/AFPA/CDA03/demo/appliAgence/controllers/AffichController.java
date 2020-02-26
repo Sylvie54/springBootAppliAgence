@@ -45,7 +45,7 @@ public class AffichController
            params.put("circuit", c );
            if (c == null) {
                this.findAll(params);
-               params.put("message", "Circuit non trouvé" );
+               params.put("message", "le circuit est non trouvé" );
                return "listeCircuits";
            }
            else {

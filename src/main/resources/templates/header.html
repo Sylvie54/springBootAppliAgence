@@ -1,16 +1,10 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 
-<html xmlns:th="http://www.thymeleaf.org">    
     <head>
-        <title>detail circuit</title>
+        <title>liste des circuits</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
         <link href="/bootstrap.css" rel="stylesheet" th:href="@{/bootstrap.css}"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet">
@@ -50,34 +44,6 @@ and open the template in the editor.
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
-</nav>     
-    </head>
-    <body>
-       <h2>Détail d'un circuit</h2>
-        <form name="SaisieCircuit" method="post">
-	<table class="table">
-	<tr>
-		<td>Id :</td>
-                <td><h3> <input type="text" name="Id" id="Id"  size="50" readonly th:value="${circuit.id}"></h3></td>
-	</tr> 
-	<tr>
-		<td>Nom :</td>
-		<td><h3 > <input type="text" name="Nom" id="Nom"  size="50" th:value="${circuit.nom}"></h3></td>
-	</tr>
-	<tr>
-		<td>Pays :</td>
-                <td><h3><input type="text" name="pays" id="pays"  size="50" th:value="${circuit.pays}"></h3></td>
-	</tr>
-
-	</table>
-      
-        <input type="submit" value="Valider" name="BtnSubmit" /> </p>
-     </form>
-       <br>
-       <a th:href="@{'/circuits/'}" class="btn btn-danger">Liste des circuits</a>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-       
-    </body>
-</html>
+</nav> 
+        
+</head>
