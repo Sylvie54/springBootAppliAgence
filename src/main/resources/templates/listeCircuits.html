@@ -14,7 +14,22 @@ and open the template in the editor.
         <link href="../static/css/bootstrap.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet">
-    </head>
+          <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
+          <a class="navbar-brand" href="">Home</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span> 
+          </button> 
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active">
+                <a class="nav-link" href="ajout">Ajout <span class="sr-only"></span></a>
+              </li>
+              
+          </div>
+        </nav> 
+        
+</head>
     <body>
         <div class="container">
     <h2>Liste des circuits</h2>
@@ -29,6 +44,7 @@ and open the template in the editor.
         </tr>
         </thead>
         <tbody>
+        <p class='rouge'><span th:text="${message}"></span></p>    
         <tr th:each="c:${circuits}">
             <td>
             <a th:href="@{'/circuits/' + ${c.id}}" class="btn btn-danger">
@@ -51,5 +67,6 @@ and open the template in the editor.
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="../static/js/bootstrap.js" th:href="@{/js/bootstrap.js}"></script>
-    </body>
+</body>
+   
 </html>

@@ -37,18 +37,29 @@ public class AffichController
     @RequestMapping(value = "/circuits/{id}", method = RequestMethod.GET)
   //  @GetMapping("/circuits/{id}") 								
     //appel API recherche circuit id
-    public String findById(@PathVariable int id, ModelMap params)
+    public String findById(@PathVariable int id, ModelMap params) throws Exception
+            
     {
-       Circuits c = CircuitDao.findById(id);
-       params.put("circuit", c );
-       // on appelle le template detailCircuit.html, en lui passant en paramètre 
-       // le circuit demandé
-       return "detailCircuit";
+       try { 
+           Circuits c = CircuitDao.findById(id);
+           params.put("circuit", c );
+           if (c == null) {
+               this.findAll(params);
+               params.put("message", "Circuit non trouvé" );
+               return "listeCircuits";
+           }
+           else {
+               return "detailCircuit";
+           }
+       }
+       catch (Exception e) {
+           this.findAll(params);
+           return "listeCircuits";
+       }
     }
     
     @RequestMapping(value = "/circuits/{id}", method = RequestMethod.POST)
     public String Update(ModelMap params,@RequestParam("Id") int Id,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
-        System.out.println(" id : " + Id + "le nom : " + nom + " le pays : " + pays);
         Circuits circuit = new Circuits(Id, nom, pays);
         CircuitsData.save(circuit);
         this.findAll(params);
