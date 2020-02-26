@@ -47,7 +47,7 @@ public class AffichController
     }
     
     @RequestMapping(value = "/circuits/{id}", method = RequestMethod.POST)
-    public String retourFormulaire(ModelMap params,@RequestParam("Id") int Id,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
+    public String Update(ModelMap params,@RequestParam("Id") int Id,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
         System.out.println(" id : " + Id + "le nom : " + nom + " le pays : " + pays);
         Circuits circuit = new Circuits(Id, nom, pays);
         CircuitsData.save(circuit);
@@ -83,9 +83,8 @@ public class AffichController
     // réaffichage de tous les circuits après la suppression   
     }
             
-     @RequestMapping(value = "/circuits/ajout", method = RequestMethod.GET)
-  
-    public String ajout( ModelMap params)
+    @RequestMapping(value = "/circuits/ajout", method = RequestMethod.GET)
+    public String create( ModelMap params)
     {
        Circuits c = new Circuits();
        params.put("circuit", c );
@@ -94,7 +93,7 @@ public class AffichController
        return "detailCircuit";
     }
     @RequestMapping(value = "/circuits/ajout", method = RequestMethod.POST)
-    public String retourAjout(ModelMap params,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
+    public String comeBackCreate(ModelMap params,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
         System.out.println("ajout le nom : " + nom + " le pays : " + pays);
         Circuits circuit = new Circuits(0, nom, pays);
         CircuitsData.save(circuit);

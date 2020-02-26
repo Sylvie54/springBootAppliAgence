@@ -13,7 +13,7 @@ and open the template in the editor.
         
     </head>
     <body>
-       <h1>Détail d'un circuit</h1>
+       <h2>Détail d'un circuit</h2>
         <form name="SaisieCircuit" method="post">
 	<table class="table">
 	<tr>
@@ -33,5 +33,7 @@ and open the template in the editor.
       
         <input type="submit" value="Valider" name="BtnSubmit" /> </p>
      </form>
+       <br>
+       <a th:href="@{'/circuits/'}" class="btn btn-danger">Liste des circuits</a>
     </body>
 </html>
