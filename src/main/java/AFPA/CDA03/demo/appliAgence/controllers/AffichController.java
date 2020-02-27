@@ -5,11 +5,8 @@
  */
 package AFPA.CDA03.demo.appliAgence.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import AFPA.CDA03.demo.appliAgence.Dao.CircuitDao;
 import AFPA.CDA03.demo.appliAgence.Dao.CircuitsRepository;
-import AFPA.CDA03.demo.appliAgence.modelExceptions.ModelExceptions;
 import AFPA.CDA03.demo.appliAgence.models.Circuits;
 import java.util.List;
 import javax.validation.Valid;
@@ -22,14 +19,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -38,35 +27,29 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 //@ResponseBody  //  pour répondre sans passer par une vue
-public class AffichController implements WebMvcConfigurer
-        
+public class AffichController 
 {
     
-    public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/ajoutCircuit").setViewName("ajoutCircuit");
-	}
     @Autowired
     private CircuitsRepository CircuitsData;
     
-    @RequestMapping(value = "/circuits/{id}", method = RequestMethod.GET)
-  //  @GetMapping("/circuits/{id}") 								
+    @GetMapping("/circuits/{id}")
     //appel API recherche circuit id
     public String findById(@PathVariable int id, ModelMap params) throws Exception
-            
     {
-       try { 
-           Circuits c = CircuitDao.findById(id);
-           params.put("circuit", c );
-           if (c == null) {
+        try { 
+            Circuits c = CircuitDao.findById(id);
+            params.put("circuit", c );
+            if (c == null) {
                this.findAll(params);
                params.put("message", "le circuit est non trouvé" );
                return "listeCircuits";
-           }
-           else {
+            }
+            else {
                return "detailCircuit";
-           }
-       }
-       catch (Exception e) {
+            }
+        }
+        catch (Exception e) {
            this.findAll(params);
            return "listeCircuits";
        }
@@ -75,10 +58,8 @@ public class AffichController implements WebMvcConfigurer
     @PostMapping("/circuits/{id}")
     public String Update(@ModelAttribute("circuit") @Valid Circuits circuit,BindingResult bindingResult,
             Model model,ModelMap params)
-            
     {
         if (bindingResult.hasErrors()) {
-            System.out.println("-------------  id : " + circuit.getId());
             return "detailCircuit";
         }
         CircuitsData.save(circuit);
@@ -94,11 +75,9 @@ public class AffichController implements WebMvcConfigurer
         // on appelle le template listeCircuits.html, en lui passant en paramètre 
         // la liste de tous les circuits
         params.put("circuits", liste );
-        
-        // return "listeCircuitsSimple";	
-    // affichage de base sous forme de table 
+    //  affichage de base sous forme de table 
         return "listeCircuits";		
-    // avec détail des circuits et suppression par l'icône de poubelle
+    //  avec détail des circuits et suppression par l'icône de poubelle
     }
     
       
@@ -114,7 +93,7 @@ public class AffichController implements WebMvcConfigurer
     // réaffichage de tous les circuits après la suppression   
     }
             
-   @GetMapping("/circuits/ajout")
+    @GetMapping("/circuits/ajout")
     public String create( @ModelAttribute("circuit") Circuits circuit, Model model)
     {
       
