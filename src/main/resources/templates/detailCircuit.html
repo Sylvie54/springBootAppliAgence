@@ -56,21 +56,25 @@ and open the template in the editor.
        <h3>Détail d'un circuit</h3>
         <form name="SaisieCircuit" method="post">
 	<table class="table">
-	<tr>
+	 <form action="#" th:action="@{/circuits/ajout}"  th:object="${circuit}" method="post">
+	<table class="table">
+        <tr>
 		<td>Id :</td>
-		<td><h3 th:text="${circuit.id}"></h3></td>
+		<td th:text="${circuit.id}"></td>
 	</tr> 
 	<tr>
 		<td>Nom :</td>
-		<td><h3 th:text="${circuit.nom}"></h3></td>
-	</tr>
+                <td><input type="text" name="nom"  th:field="*{nom}"  /></td>
+                <td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom Error</td>
+        </tr>
 	<tr>
 		<td>Pays :</td>
-		<td><h3 th:text="${circuit.pays}"></h3></td>
-	</tr>
+                <td><input type="text"  th:field="*{pays}"  /></td>
+                <td th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}">Pays Error</td>
+        </tr>
 
 	</table>
-        
+         <td><button type="submit">Submit</button></td>
      </form>
        <br>
        <a th:href="@{'/circuits/'}" class="btn btn-danger">Liste des circuits</a>

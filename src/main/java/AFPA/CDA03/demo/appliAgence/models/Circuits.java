@@ -25,11 +25,11 @@ public class Circuits {
     private int id;
     
     @NotNull
-    @Size(min=2, max=30, message= "nom vide")
+    @Size(min=2, max=30, message= "le nom doit faire entre 2 et 30 caractères")
     private String nom;
     
     @NotNull
-    @NotEmpty
+    @NotEmpty (message = "le pays ne doit pas être vide")
     private String pays;
     
     public Circuits() { }

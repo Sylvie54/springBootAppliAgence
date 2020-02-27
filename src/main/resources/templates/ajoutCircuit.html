@@ -61,12 +61,12 @@ and open the template in the editor.
          
 	<tr>
 		<td>Nom :</td>
-                <td><input type="text"  th:field="*{nom}" /></td>
+                <td><input type="text" name="nom"  th:field="*{nom}"  /></td>
                 <td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom Error</td>
         </tr>
 	<tr>
 		<td>Pays :</td>
-                <td><input type="text" th:field="*{pays}" /></td>
+                <td><input type="text"  th:field="*{pays}"  /></td>
                 <td th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}">Pays Error</td>
         </tr>
 

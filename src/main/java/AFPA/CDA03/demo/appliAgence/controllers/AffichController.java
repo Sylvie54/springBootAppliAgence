@@ -15,9 +15,11 @@ import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -70,11 +72,15 @@ public class AffichController implements WebMvcConfigurer
        }
     }
     
-    @RequestMapping(value = "/circuits/{id}", method = RequestMethod.POST)
-    public String Update(ModelMap params,@RequestParam("Id") int Id,@RequestParam("Nom") String nom, @RequestParam("pays") String pays)
-            throws ModelExceptions
+    @PostMapping("/circuits/{id}")
+    public String Update(@ModelAttribute("circuit") @Valid Circuits circuit,BindingResult bindingResult,
+            Model model,ModelMap params)
+            
     {
-        Circuits circuit = new Circuits(Id, nom, pays);
+        if (bindingResult.hasErrors()) {
+            System.out.println("-------------  id : " + circuit.getId());
+            return "detailCircuit";
+        }
         CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
@@ -109,24 +115,18 @@ public class AffichController implements WebMvcConfigurer
     }
             
    @GetMapping("/circuits/ajout")
-    public String create( ModelMap params, Circuits circuit)
+    public String create( @ModelAttribute("circuit") Circuits circuit, Model model)
     {
-       Circuits c = new Circuits();
-       params.put("circuit", c );
-       
+      
        return "ajoutCircuit";
     }
     @PostMapping("/circuits/ajout")
-    public String comeBackCreate(@Valid Circuits circuit,BindingResult bindingResult,ModelMap params)
-           {
-        
-        System.out.println("ajout un nom " + circuit.getNom());
+    public String comeBackCreate(@ModelAttribute("circuit") @Valid Circuits circuit,BindingResult bindingResult,
+            Model model,ModelMap params)
+   {
         if (bindingResult.hasErrors()) {
-            params.put("circuit", circuit);
-            System.out.println(bindingResult.getFieldError());
             return "ajoutCircuit";
         }
-       // Circuits circuit = new Circuits(0, nom, pays);
         CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
