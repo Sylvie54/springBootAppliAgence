@@ -110,9 +110,6 @@ public class AffichController implements WebMvcConfigurer
    @GetMapping("/circuits/ajout")
     public String create( ModelMap params, Circuits circuit)
     {
-       Circuits c = new Circuits();
-       params.put("circuit", c );
-       
        return "ajoutCircuit";
     }
     @PostMapping("/circuits/ajout")
@@ -123,7 +120,7 @@ public class AffichController implements WebMvcConfigurer
         if (bindingResult.hasErrors()) {
             return "ajoutCircuit";
         }
-       // Circuits circuit = new Circuits(0, nom, pays);
+
         CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
