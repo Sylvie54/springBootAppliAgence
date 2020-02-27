@@ -25,10 +25,11 @@ public class Circuits {
     private int id;
     
     @NotNull
-    @Size(min=2, max=30)
+    @Size(min=2, max=30, message= "nom vide")
     private String nom;
     
     @NotNull
+    @NotEmpty
     private String pays;
     
     public Circuits() { }

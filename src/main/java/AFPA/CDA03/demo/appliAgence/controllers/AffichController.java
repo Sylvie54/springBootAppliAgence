@@ -39,8 +39,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AffichController implements WebMvcConfigurer
         
 {
+    
     public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/listeCircuits").setViewName("listeCircuits");
+		registry.addViewController("/ajoutCircuit").setViewName("ajoutCircuit");
 	}
     @Autowired
     private CircuitsRepository CircuitsData;
@@ -121,6 +122,8 @@ public class AffichController implements WebMvcConfigurer
         
         System.out.println("ajout un nom " + circuit.getNom());
         if (bindingResult.hasErrors()) {
+            params.put("circuit", circuit);
+            System.out.println(bindingResult.getFieldError());
             return "ajoutCircuit";
         }
        // Circuits circuit = new Circuits(0, nom, pays);
