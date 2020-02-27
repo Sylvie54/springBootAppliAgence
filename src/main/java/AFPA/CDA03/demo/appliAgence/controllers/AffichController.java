@@ -5,14 +5,18 @@
  */
 package AFPA.CDA03.demo.appliAgence.controllers;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import AFPA.CDA03.demo.appliAgence.Dao.CircuitDao;
 import AFPA.CDA03.demo.appliAgence.Dao.CircuitsRepository;
 import AFPA.CDA03.demo.appliAgence.modelExceptions.ModelExceptions;
 import AFPA.CDA03.demo.appliAgence.models.Circuits;
 import java.util.List;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +25,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
@@ -30,8 +36,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 //@ResponseBody  //  pour répondre sans passer par une vue
-public class AffichController 
+public class AffichController implements WebMvcConfigurer
+        
 {
+    public void addViewControllers(ViewControllerRegistry registry) {
+		registry.addViewController("/listeCircuits").setViewName("listeCircuits");
+	}
     @Autowired
     private CircuitsRepository CircuitsData;
     
@@ -97,35 +107,28 @@ public class AffichController
     // réaffichage de tous les circuits après la suppression   
     }
             
-    @RequestMapping(value = "/circuits/ajout", method = RequestMethod.GET)
-    public String create( ModelMap params)
+   @GetMapping("/circuits/ajout")
+    public String create( ModelMap params, Circuits circuit)
     {
        Circuits c = new Circuits();
        params.put("circuit", c );
-       // on appelle le template detailCircuit.html, en lui passant en paramètre 
-       // le circuit demandé
+       
        return "ajoutCircuit";
     }
-    @RequestMapping(value = "/circuits/ajout", method = RequestMethod.POST)
-    public String comeBackCreate(ModelMap params,@RequestParam("Nom") String nom, @RequestParam("pays") String pays)
-            throws ModelExceptions{
-        try {
-        System.out.println("ajout le nom : " + nom + " le pays : " + pays);
-        Circuits circuit = new Circuits(0, nom, pays);
+    @PostMapping("/circuits/ajout")
+    public String comeBackCreate(@Valid Circuits circuit,BindingResult bindingResult,ModelMap params)
+           {
+        
+        System.out.println("ajout un nom " + circuit.getNom());
+        if (bindingResult.hasErrors()) {
+            return "ajoutCircuit";
+        }
+       // Circuits circuit = new Circuits(0, nom, pays);
         CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
         }
-        catch (ModelExceptions me)
-        { 
-            params.put("message", me.getMessage() );
-            return "ajoutCircuit";
-        }
-        catch (Exception e )
-        { 
-            params.put("message", e.getMessage() );
-            return "ajoutCircuit";
-        }
+        
     }
     	
-}
+

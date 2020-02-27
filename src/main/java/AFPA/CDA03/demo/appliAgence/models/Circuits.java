@@ -9,6 +9,10 @@ import AFPA.CDA03.demo.appliAgence.modelExceptions.ModelExceptions;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  *
@@ -19,10 +23,16 @@ public class Circuits {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @javax.persistence.Id
     private int id;
+    
+    @NotNull
+    @Size(min=2, max=30)
     private String nom;
+    
+    @NotNull
     private String pays;
+    
     public Circuits() { }
-    public Circuits(int id, String nom, String pays) throws ModelExceptions
+    public Circuits(int id, String nom, String pays) 
     {
         this.setId(id);
         this.setNom(nom);
@@ -38,10 +48,8 @@ public class Circuits {
         return nom;
     }
 
-    public void setNom(String nom) throws  ModelExceptions{
-        if (nom == null || nom.isEmpty()) {
-            throw new ModelExceptions(("le champ nom est vide"));
-        }
+    public void setNom(String nom) {
+        
             
         this.nom = nom;
     }
