@@ -5,6 +5,7 @@
  */
 package AFPA.CDA03.demo.appliAgence.models;
 
+import AFPA.CDA03.demo.appliAgence.modelExceptions.ModelExceptions;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -21,10 +22,11 @@ public class Circuits {
     private String nom;
     private String pays;
     public Circuits() { }
-    public Circuits(int id, String nom, String pays) {
-        this.id = id;
-        this.nom = nom;
-        this.pays = pays; 
+    public Circuits(int id, String nom, String pays) throws ModelExceptions
+    {
+        this.setId(id);
+        this.setNom(nom);
+        this.setPays(pays);
     }
     public int getId() {
         return id;
@@ -36,7 +38,11 @@ public class Circuits {
         return nom;
     }
 
-    public void setNom(String nom) {
+    public void setNom(String nom) throws  ModelExceptions{
+        if (nom == null || nom.isEmpty()) {
+            throw new ModelExceptions(("le champ nom est vide"));
+        }
+            
         this.nom = nom;
     }
 

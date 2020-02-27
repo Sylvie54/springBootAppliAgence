@@ -7,6 +7,7 @@ package AFPA.CDA03.demo.appliAgence.controllers;
 
 import AFPA.CDA03.demo.appliAgence.Dao.CircuitDao;
 import AFPA.CDA03.demo.appliAgence.Dao.CircuitsRepository;
+import AFPA.CDA03.demo.appliAgence.modelExceptions.ModelExceptions;
 import AFPA.CDA03.demo.appliAgence.models.Circuits;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +60,9 @@ public class AffichController
     }
     
     @RequestMapping(value = "/circuits/{id}", method = RequestMethod.POST)
-    public String Update(ModelMap params,@RequestParam("Id") int Id,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
+    public String Update(ModelMap params,@RequestParam("Id") int Id,@RequestParam("Nom") String nom, @RequestParam("pays") String pays)
+            throws ModelExceptions
+    {
         Circuits circuit = new Circuits(Id, nom, pays);
         CircuitsData.save(circuit);
         this.findAll(params);
@@ -101,15 +104,28 @@ public class AffichController
        params.put("circuit", c );
        // on appelle le template detailCircuit.html, en lui passant en paramètre 
        // le circuit demandé
-       return "detailCircuit";
+       return "ajoutCircuit";
     }
     @RequestMapping(value = "/circuits/ajout", method = RequestMethod.POST)
-    public String comeBackCreate(ModelMap params,@RequestParam("Nom") String nom, @RequestParam("pays") String pays) {
+    public String comeBackCreate(ModelMap params,@RequestParam("Nom") String nom, @RequestParam("pays") String pays)
+            throws ModelExceptions{
+        try {
         System.out.println("ajout le nom : " + nom + " le pays : " + pays);
         Circuits circuit = new Circuits(0, nom, pays);
         CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
+        }
+        catch (ModelExceptions me)
+        { 
+            params.put("message", me.getMessage() );
+            return "ajoutCircuit";
+        }
+        catch (Exception e )
+        { 
+            params.put("message", e.getMessage() );
+            return "ajoutCircuit";
+        }
     }
     	
 }
