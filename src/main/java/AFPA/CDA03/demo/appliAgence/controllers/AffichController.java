@@ -5,29 +5,20 @@
  */
 package AFPA.CDA03.demo.appliAgence.controllers;
 
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import AFPA.CDA03.demo.appliAgence.Dao.CircuitDao;
 import AFPA.CDA03.demo.appliAgence.Dao.CircuitsRepository;
-import AFPA.CDA03.demo.appliAgence.modelExceptions.ModelExceptions;
 import AFPA.CDA03.demo.appliAgence.models.Circuits;
 import java.util.List;
 import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -36,45 +27,41 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 //@ResponseBody  //  pour répondre sans passer par une vue
-public class AffichController implements WebMvcConfigurer
-        
+public class AffichController 
 {
     
-    public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/ajoutCircuit").setViewName("ajoutCircuit");
-	}
     @Autowired
     private CircuitsRepository CircuitsData;
     
-    @RequestMapping(value = "/circuits/{id}", method = RequestMethod.GET)
-  //  @GetMapping("/circuits/{id}") 								
+    @GetMapping("/circuits/{id}")
     //appel API recherche circuit id
     public String findById(@PathVariable int id, ModelMap params) throws Exception
-            
     {
-       try { 
-           Circuits c = CircuitDao.findById(id);
-           params.put("circuit", c );
-           if (c == null) {
+        try { 
+            Circuits c = CircuitDao.findById(id);
+            params.put("circuit", c );
+            if (c == null) {
                this.findAll(params);
                params.put("message", "le circuit est non trouvé" );
                return "listeCircuits";
-           }
-           else {
+            }
+            else {
                return "detailCircuit";
-           }
-       }
-       catch (Exception e) {
+            }
+        }
+        catch (Exception e) {
            this.findAll(params);
            return "listeCircuits";
        }
     }
     
-    @RequestMapping(value = "/circuits/{id}", method = RequestMethod.POST)
-    public String Update(ModelMap params,@RequestParam("Id") int Id,@RequestParam("Nom") String nom, @RequestParam("pays") String pays)
-            throws ModelExceptions
+    @PostMapping("/circuits/{id}")
+    public String Update(@ModelAttribute("circuit") @Valid Circuits circuit,BindingResult bindingResult,
+            Model model,ModelMap params)
     {
-        Circuits circuit = new Circuits(Id, nom, pays);
+        if (bindingResult.hasErrors()) {
+            return "detailCircuit";
+        }
         CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
@@ -88,11 +75,9 @@ public class AffichController implements WebMvcConfigurer
         // on appelle le template listeCircuits.html, en lui passant en paramètre 
         // la liste de tous les circuits
         params.put("circuits", liste );
-        
-        // return "listeCircuitsSimple";	
-    // affichage de base sous forme de table 
+    //  affichage de base sous forme de table 
         return "listeCircuits";		
-    // avec détail des circuits et suppression par l'icône de poubelle
+    //  avec détail des circuits et suppression par l'icône de poubelle
     }
     
       
@@ -108,25 +93,25 @@ public class AffichController implements WebMvcConfigurer
     // réaffichage de tous les circuits après la suppression   
     }
             
-   @GetMapping("/circuits/ajout")
-    public String create( ModelMap params, Circuits circuit)
+    @GetMapping("/circuits/ajout")
+    public String create( @ModelAttribute("circuit") Circuits circuit, Model model)
     {
+<<<<<<< HEAD
        Circuits c = new Circuits();
        params.put("circuit", c );
            
+=======
+      
+>>>>>>> c682760d478b2dd0d57b1f26c08894aa7e3a68ab
        return "ajoutCircuit";
     }
     @PostMapping("/circuits/ajout")
-    public String comeBackCreate(@Valid Circuits circuit,BindingResult bindingResult,ModelMap params)
-           {
-        
-        System.out.println("ajout un nom " + circuit.getNom());
+    public String comeBackCreate(@ModelAttribute("circuit") @Valid Circuits circuit,BindingResult bindingResult,
+            Model model,ModelMap params)
+   {
         if (bindingResult.hasErrors()) {
-            params.put("circuit", circuit);
-            System.out.println(bindingResult.getFieldError());
             return "ajoutCircuit";
         }
-       // Circuits circuit = new Circuits(0, nom, pays);
         CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
