@@ -10,74 +10,33 @@ and open the template in the editor.
         <title>detail circuit</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
-        <link href="/bootstrap.css" rel="stylesheet" th:href="@{/bootstrap.css}"/>
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-              rel="stylesheet">
-          <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
-  <a class="navbar-brand" href="/circuits">Home</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span> 
-  </button> 
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/circuits/ajout">Ajout <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Navigation
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/circuits/ajout">ajout</a>
-          <a class="dropdown-item" href="?cmd=page2">page Prof</a>
-          <a class="dropdown-item" href="?cmd=page3">saisie Session</a>
-          <a class="dropdown-item" href="?cmd=page4">saisie Prof</a>
-      <!--    <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a> -->
-        </div>
-      </li>
-      <li class="nav-item">
-      <!--  <a class="nav-link disabled" href="#">Contact</a> -->
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>     
+        <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+    <div th:insert="header :: header"></div>   
     </head>
     <body>
-       <h3>Ajout d'un circuit</h3>
+        <h5>Ajout d'un circuit</h5>
         <p class='rouge'><span th:text="${message}"></span></p>   
-        <form action="#" th:action="@{/circuits/ajout}"  th:object="${circuits}" method="post">
-	<table class="table">
-         
-	<tr>
-		<td>Nom :</td>
-                <td><input type="text"  th:field="*{nom}" /></td>
-                <td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom Error</td>
-        </tr>
-	<tr>
-		<td>Pays :</td>
-                <td><input type="text" th:field="*{pays}" /></td>
-                <td th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}">Pays Error</td>
-        </tr>
 
-	</table>
-      
-        <td><button type="submit">Submit</button></td>
+
+    
+        <form action="#" th:action="@{/circuits/ajout}"  th:object="${circuits}" method="post">
+            <table class="table">
+            <tr>
+                <td>Nom :</td>
+                <td><input type="text" name="nom"  th:field="*{nom}"  /></td>
+
+                <td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom Error</td>
+            </tr>
+            <tr>
+                <td>Pays :</td>
+                <td><input type="text"  th:field="*{pays}"  /></td>
+                <td th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}">Pays Error</td>
+            </tr>
+            </table>
+            <td><button type="submit">Submit</button></td>
      </form>
        <br>
        <a th:href="@{'/circuits/'}" class="btn btn-danger">Liste des circuits</a>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
-       
+       <div th:insert="footer :: footer"></div>    
     </body>
 </html>

@@ -1,40 +1,37 @@
-
-    <head>
-        <title>liste des circuits</title>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" type="text/css" th:href="@{/style.css}"/>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<body>
+    <header th:fragment="header">
         <link href="/bootstrap.css" rel="stylesheet" th:href="@{/bootstrap.css}"/>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
               rel="stylesheet">
-          <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
-  <a class="navbar-brand" href="/circuits">Home</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span> 
-  </button> 
+        <nav class="navbar navbar-expand-lg  navbar-dark bg-primary">
+          <a class="navbar-brand" href="/circuits">Home</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> 
+            </button> 
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="/circuits/ajout">Ajout <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">About</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Navigation
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/circuits/ajout">ajout</a>
-          <a class="dropdown-item" href="?cmd=page2">page Prof</a>
-          <a class="dropdown-item" href="?cmd=page3">saisie Session</a>
-          <a class="dropdown-item" href="?cmd=page4">saisie Prof</a>
-      <!--    <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a> -->
-        </div>
-      </li>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/circuits/ajout">Ajout <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Navigation
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/circuits/ajout">ajout</a>
+                        <a class="dropdown-item" href="?cmd=page2">page Prof</a>
+                        <a class="dropdown-item" href="?cmd=page3">saisie Session</a>
+                        <a class="dropdown-item" href="?cmd=page4">saisie Prof</a>
+                  <!--    <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a> -->
+                      </div>
+                    </li>
       <li class="nav-item">
       <!--  <a class="nav-link disabled" href="#">Contact</a> -->
       </li>
@@ -44,6 +41,6 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
-</nav> 
-        
-</head>
+</nav>    
+</body>
+</html>
