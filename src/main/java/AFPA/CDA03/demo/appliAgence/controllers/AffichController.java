@@ -96,7 +96,7 @@ public class AffichController
     @GetMapping("/circuits/ajout")
     public String create( @ModelAttribute("circuit") Circuits circuit, Model model)
     {
-      
+
        return "ajoutCircuit";
     }
     @PostMapping("/circuits/ajout")
@@ -106,6 +106,7 @@ public class AffichController
         if (bindingResult.hasErrors()) {
             return "ajoutCircuit";
         }
+
         CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
