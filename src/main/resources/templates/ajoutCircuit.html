@@ -16,12 +16,15 @@ and open the template in the editor.
     <body>
         <h5>Ajout d'un circuit</h5>
         <p class='rouge'><span th:text="${message}"></span></p>   
+
+
     
-        <form action="#" th:action="@{/circuits/ajout}"  th:object="${circuit}" method="post">
+        <form action="#" th:action="@{/circuits/ajout}"  th:object="${circuits}" method="post">
             <table class="table">
             <tr>
                 <td>Nom :</td>
                 <td><input type="text" name="nom"  th:field="*{nom}"  /></td>
+
                 <td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom Error</td>
             </tr>
             <tr>

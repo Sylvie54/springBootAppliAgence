@@ -39,7 +39,7 @@ public class AffichController
     {
         try { 
             Circuits c = CircuitDao.findById(id);
-            params.put("circuit", c );
+            params.put("circuits", c );
             if (c == null) {
                this.findAll(params);
                params.put("message", "le circuit est non trouvé" );
@@ -56,8 +56,8 @@ public class AffichController
     }
     
     @PostMapping("/circuits/{id}")
-    public String Update(@ModelAttribute("circuit") @Valid Circuits circuit,BindingResult bindingResult,
-            Model model,ModelMap params)
+    public String Update( @Valid Circuits circuit,BindingResult bindingResult,
+            ModelMap params)
     {
         if (bindingResult.hasErrors()) {
             return "detailCircuit";
@@ -94,24 +94,19 @@ public class AffichController
     }
             
     @GetMapping("/circuits/ajout")
-    public String create( @ModelAttribute("circuit") Circuits circuit, Model model)
+    public String create( Circuits circuit)
     {
-<<<<<<< HEAD
-       Circuits c = new Circuits();
-       params.put("circuit", c );
-           
-=======
-      
->>>>>>> c682760d478b2dd0d57b1f26c08894aa7e3a68ab
+
        return "ajoutCircuit";
     }
     @PostMapping("/circuits/ajout")
-    public String comeBackCreate(@ModelAttribute("circuit") @Valid Circuits circuit,BindingResult bindingResult,
-            Model model,ModelMap params)
+    public String comeBackCreate( @Valid Circuits circuit,BindingResult bindingResult,
+            ModelMap params)
    {
         if (bindingResult.hasErrors()) {
             return "ajoutCircuit";
         }
+
         CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
