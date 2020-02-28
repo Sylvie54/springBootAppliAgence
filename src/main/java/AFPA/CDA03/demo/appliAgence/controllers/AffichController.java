@@ -1,4 +1,4 @@
-/*
+o/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -112,19 +112,8 @@ public class AffichController
         this.findAll(params);
         return "listeCircuits";	
         }
-       // Login form
-    @RequestMapping("/circuits/logins")
-    public String login() {
-        System.out.println("--------------   login");
-        return "login";
-    }
-
-    // Login form with error
-    @RequestMapping("/circuits/login-error.html")
-    public String loginError(Model model) {
-        model.addAttribute("loginError", true);
-        return "login";
+     
     } 
-    }
+    
     	
 
