@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  *
@@ -111,7 +112,19 @@ public class AffichController
         this.findAll(params);
         return "listeCircuits";	
         }
-        
+       // Login form
+    @RequestMapping("/circuits/logins")
+    public String login() {
+        System.out.println("--------------   login");
+        return "login";
+    }
+
+    // Login form with error
+    @RequestMapping("/circuits/login-error.html")
+    public String loginError(Model model) {
+        model.addAttribute("loginError", true);
+        return "login";
+    } 
     }
     	
 
