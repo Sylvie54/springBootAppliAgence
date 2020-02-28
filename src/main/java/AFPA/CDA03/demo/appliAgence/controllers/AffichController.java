@@ -113,7 +113,7 @@ public class AffichController implements WebMvcConfigurer
     {
        Circuits c = new Circuits();
        params.put("circuit", c );
-       
+           
        return "ajoutCircuit";
     }
     @PostMapping("/circuits/ajout")
