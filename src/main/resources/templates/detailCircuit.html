@@ -16,8 +16,8 @@ and open the template in the editor.
     <body>
         <div th:insert="header :: header"></div>  
         <h5>modification d'un circuit</h5>
-        <form name="SaisieCircuit" method="post">
-	<table class="table">
+        
+        <table class="table">
 	 <form action="#" th:action="@{/circuits/ajout}"  th:object="${circuits}" method="post">
 	<table class="table">
         <tr>
