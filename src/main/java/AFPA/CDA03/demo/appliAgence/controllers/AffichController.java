@@ -1,4 +1,4 @@
-o/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -93,7 +93,12 @@ public class AffichController
        return findAll (params) ; 						
     // réaffichage de tous les circuits après la suppression   
     }
-            
+    @GetMapping("/tarifs")
+    public String tarifs( )
+    {
+
+       return "tarifs";
+    }        
     @GetMapping("/circuits/ajout")
     public String create( Circuits circuit)
     {

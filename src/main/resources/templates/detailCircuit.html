@@ -40,6 +40,10 @@ and open the template in the editor.
     </form>
     <br>
     <a th:href="@{'/circuits/'}" class="btn btn-danger">Liste des circuits</a>
+    <h6 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h6>
+        <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form>
     <div th:insert="footer :: footer"></div>     
     </body>
 </html>
