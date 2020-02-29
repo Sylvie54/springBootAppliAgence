@@ -7,22 +7,22 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
-        <link rel="stylesheet" type="text/css" th:href="@{css/style.css}"/>
+        <link rel="stylesheet" type="text/css" th:href="@{../css/style.css}"/>  
 </head>
     <body>
         <div th:insert="header :: header"></div>   
         <div class="container">
         <h5>Liste des circuits</h5>
+        <p class='rouge'><span th:text="${message}"></span></p>    
         <table class="table">
             <thead>
             <tr>
                 <th>Id</th>
-                    <th>Nom</th>
-                    <th>Pays</th>
+                <th>Nom</th>
+                <th>Pays</th>
             </tr>
             </thead>
             <tbody>
-            <p class='rouge'><span th:text="${message}"></span></p>    
             <tr th:each="c:${circuits}">
                 <td>
                     <a th:href="@{'/circuits/' + ${c.id}}" class="btn btn-danger">

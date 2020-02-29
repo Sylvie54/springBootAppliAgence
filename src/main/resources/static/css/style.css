@@ -8,8 +8,12 @@ and open the template in the editor.
     Author     : Acer
 */
 .rouge {
-     font-size:15pt; 
+     font-size:16pt; 
     color: red;
+}
+.vert {
+     font-size:16pt; 
+    color: green;
 }
 #container {
     padding-top:50px;
