@@ -56,7 +56,7 @@ public class AffichController
        }
     }
     
-    @PostMapping("/circuits/{id}")
+    @PostMapping("/circuits/update")
     public String Update( @Valid Circuits circuit,BindingResult bindingResult,
             ModelMap params)
     {
@@ -96,28 +96,30 @@ public class AffichController
     @GetMapping("/tarifs")
     public String tarifs( )
     {
-
        return "tarifs";
     }        
     @GetMapping("/circuits/ajout")
     public String create( Circuits circuit)
     {
-
        return "ajoutCircuit";
+    }
+    @GetMapping("/inscription")
+    public String inscription()
+    {
+       return "inscription";
     }
     @PostMapping("/circuits/ajout")
     public String comeBackCreate( @Valid Circuits circuit,BindingResult bindingResult,
             ModelMap params)
-   {
+    {
         if (bindingResult.hasErrors()) {
             return "ajoutCircuit";
         }
-
         CircuitsData.save(circuit);
         this.findAll(params);
         return "listeCircuits";	
         }
-     
+    
     } 
     
     	

@@ -51,4 +51,14 @@ label {
     box-sizing: border-box;
     border-radius: 8px;
 }
+.validation-error {
+    color: black;
+    background-color: indianred;
+    opacity: 0.7;
+    padding: 10px;
+    width: 30%;
+    text-align: center;
+    box-sizing: border-box;
+    border-radius: 8px;
+}
 

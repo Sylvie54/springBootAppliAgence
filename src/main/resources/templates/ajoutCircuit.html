@@ -10,7 +10,7 @@ and open the template in the editor.
         <title>ajout circuit</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-         <link rel="stylesheet" type="text/css" th:href="@{css/style.css}"/>  
+         <link rel="stylesheet" type="text/css" th:href="@{../css/style.css}"/>  
     
     </head>
     <body>
@@ -28,14 +28,16 @@ and open the template in the editor.
             <tr>
                 <td>Pays :</td>
                 <td><input type="text"  th:field="*{pays}"  /></td>
-                <td th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}">Pays Error</td>
+                <td class="rouge" th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}">Pays Error</td>
             </tr>
             </table>
             <td><button type="submit">Submit</button></td>
      </form>
        <br>
        <a th:href="@{'/circuits/'}" class="btn btn-danger">Liste des circuits</a>
+       <br>
        <h6 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h6>
+       <br>
         <form th:action="@{/logout}" method="post">
             <input type="submit" size="50" value="Sign Out"/>
         </form>

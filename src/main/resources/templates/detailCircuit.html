@@ -15,34 +15,36 @@ and open the template in the editor.
     </head>
     <body>
         <div th:insert="header :: header"></div>  
-        <h5>modification d'un circuit</h5>
+        <p>modification d'un circuit</p>
         
         <table class="table">
-	 <form action="#" th:action="@{/circuits/ajout}"  th:object="${circuits}" method="post">
+	 <form action="#" th:action="@{/circuits/update}"  th:object="${circuits}" method="post">
 	<table class="table">
         <tr>
             <td>Id :</td>
-            <td th:text="*{id}"></td>
+             <td><input type="text" name="id"  th:field="*{id}" readonly="readonly"  /></td>
 	</tr> 
 	<tr>
             <td>Nom :</td>
             <td><input type="text" name="nom"  th:field="*{nom}"  /></td>
-            <td th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}">Nom Error</td>
+            <td class= "rouge" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" >Nom Error</td>
         </tr>
 	<tr>
             <td>Pays :</td>
             <td><input type="text"  th:field="*{pays}"  /></td>
-            <td th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}">Pays Error</td>
+            <td th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}" th:errorclass="validation-error">Pays Error</td>
         </tr>
 
 	</table>
         <td><button type="submit">Submit</button></td>
     </form>
-    <br>
+    <p></p>
     <a th:href="@{'/circuits/'}" class="btn btn-danger">Liste des circuits</a>
+    <br>
     <h6 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h6>
+    <br><br>
         <form th:action="@{/logout}" method="post">
-            <input type="submit" value="Sign Out"/>
+            <input type="submit" size="50" value="Sign Out"/>
         </form>
     <div th:insert="footer :: footer"></div>     
     </body>
