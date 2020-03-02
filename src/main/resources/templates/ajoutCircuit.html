@@ -31,15 +31,15 @@ and open the template in the editor.
                 <td class="rouge" th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}">Pays Error</td>
             </tr>
             </table>
-            <td><button type="submit">Submit</button></td>
+            <td><input type="submit" class="btn btn-success" style="width:150px" value="Ajouter"/></td>
      </form>
        <br>
-       <a th:href="@{'/circuits/'}" class="btn btn-danger">Liste des circuits</a>
+       <a th:href="@{'/circuits/'}" class="btn btn-info">Liste des circuits</a>
        <br>
        <h6 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h6>
        <br>
         <form th:action="@{/logout}" method="post">
-            <input type="submit" size="50" value="Sign Out"/>
+            <input type="submit" class="btn btn-danger" style="width:150px" value="Sign Out"/>
         </form>
        <div th:insert="footer :: footer"></div>    
     </body>

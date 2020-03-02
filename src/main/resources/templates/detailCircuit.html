@@ -15,37 +15,39 @@ and open the template in the editor.
     </head>
     <body>
         <div th:insert="header :: header"></div>  
-        <p>modification d'un circuit</p>
-        
-        <table class="table">
-	 <form action="#" th:action="@{/circuits/update}"  th:object="${circuits}" method="post">
-	<table class="table">
-        <tr>
-            <td>Id :</td>
-             <td><input type="text" name="id"  th:field="*{id}" readonly="readonly"  /></td>
-	</tr> 
-	<tr>
-            <td>Nom :</td>
-            <td><input type="text" name="nom"  th:field="*{nom}"  /></td>
-            <td class= "rouge" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" >Nom Error</td>
-        </tr>
-	<tr>
-            <td>Pays :</td>
-            <td><input type="text"  th:field="*{pays}"  /></td>
-            <td th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}" th:errorclass="validation-error">Pays Error</td>
-        </tr>
+        <div class="container" style="margin:50px">
+            <p>modification d'un circuit</p>
 
-	</table>
-        <td><button type="submit">Submit</button></td>
-    </form>
-    <p></p>
-    <a th:href="@{'/circuits/'}" class="btn btn-danger">Liste des circuits</a>
-    <br>
-    <h6 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h6>
-    <br><br>
-        <form th:action="@{/logout}" method="post">
-            <input type="submit" size="50" value="Sign Out"/>
-        </form>
-    <div th:insert="footer :: footer"></div>     
+            <table class="table">
+             <form action="#" th:action="@{/circuits/update}"  th:object="${circuits}" method="post">
+            <table class="table">
+            <tr>
+                <td>Id :</td>
+                 <td><input type="text" name="id"  th:field="*{id}" readonly="readonly"  /></td>
+            </tr> 
+            <tr>
+                <td>Nom :</td>
+                <td><input type="text" name="nom"  th:field="*{nom}"  /></td>
+                <td class= "rouge" th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}" >Nom Error</td>
+            </tr>
+            <tr>
+                <td>Pays :</td>
+                <td><input type="text"  th:field="*{pays}"  /></td>
+                <td th:if="${#fields.hasErrors('pays')}" th:errors="*{pays}" th:errorclass="validation-error">Pays Error</td>
+            </tr>
+
+            </table>
+            <td><input type="submit" class="btn btn-success" style="width:150px" value="Modifier"/></td>
+            </form>
+            <p></p>
+            <a th:href="@{'/circuits/'}" class="btn-info">Liste des circuits</a>
+            <br><br><br>
+            <h6 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h6>
+            <br><br>
+                <form th:action="@{/logout}" method="post">
+                    <input type="submit" class="btn btn-danger" style="width:150px" value="Sign Out"/>
+                </form>
+        </div>
+        <div th:insert="footer :: footer"></div>     
     </body>
 </html>
